@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_inventory_variants",
+  "info": {
+    "displayName": "Variant"
+  },
+  "options": {},
+  "attributes": {
+    "size": {
+      "type": "enumeration",
+      "enum": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ]
+    },
+    "color": {
+      "type": "string"
+    },
+    "stock": {
+      "type": "integer"
+    }
+  },
+  "config": {}
+}
