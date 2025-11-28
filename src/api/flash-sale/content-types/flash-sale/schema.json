@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "flash_sales",
+  "info": {
+    "singularName": "flash-sale",
+    "pluralName": "flash-sales",
+    "displayName": "FlashSale"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "endTime": {
+      "type": "datetime"
+    },
+    "isActive": {
+      "type": "boolean"
+    },
+    "products": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product.product"
+    }
+  }
+}
