@@ -545,6 +545,10 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Blocks;
+    flash_sale: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::flash-sale.flash-sale'
+    >;
     image: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios',
       true

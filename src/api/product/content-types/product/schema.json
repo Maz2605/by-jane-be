@@ -40,6 +40,12 @@
       "relation": "manyToOne",
       "target": "api::category.category",
       "inversedBy": "products"
+    },
+    "flash_sale": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::flash-sale.flash-sale",
+      "inversedBy": "products"
     }
   }
 }
