@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_shop_order_items",
+  "info": {
+    "displayName": "OrderItem"
+  },
+  "options": {},
+  "attributes": {
+    "product": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::product.product"
+    },
+    "productName": {
+      "type": "string"
+    },
+    "productImage": {
+      "type": "string"
+    },
+    "price": {
+      "type": "biginteger"
+    },
+    "quantity": {
+      "type": "integer"
+    },
+    "variant": {
+      "type": "json"
+    }
+  },
+  "config": {}
+}
