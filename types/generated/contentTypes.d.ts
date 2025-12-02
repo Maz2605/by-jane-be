@@ -521,6 +521,44 @@ export interface ApiFlashSaleFlashSale extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
+  collectionName: 'orders';
+  info: {
+    displayName: 'Order';
+    pluralName: 'orders';
+    singularName: 'order';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    customerEmail: Schema.Attribute.Email;
+    customerName: Schema.Attribute.String;
+    customerPhone: Schema.Attribute.String;
+    items: Schema.Attribute.Component<'shop.order-item', true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::order.order'> &
+      Schema.Attribute.Private;
+    orderStatus: Schema.Attribute.Enumeration<
+      ['pending', 'confirmed', 'shipping', 'done', 'cancelled']
+    >;
+    paymentMethod: Schema.Attribute.Enumeration<['cod', 'banking']>;
+    publishedAt: Schema.Attribute.DateTime;
+    shippingAddress: Schema.Attribute.Text;
+    totalAmount: Schema.Attribute.BigInteger;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    users_permissions_user: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+  };
+}
+
 export interface ApiProductProduct extends Struct.CollectionTypeSchema {
   collectionName: 'products';
   info: {
@@ -1076,6 +1114,7 @@ export interface PluginUsersPermissionsUser
       'plugin::users-permissions.user'
     > &
       Schema.Attribute.Private;
+    orders: Schema.Attribute.Relation<'oneToMany', 'api::order.order'>;
     password: Schema.Attribute.Password &
       Schema.Attribute.Private &
       Schema.Attribute.SetMinMaxLength<{
@@ -1115,6 +1154,7 @@ declare module '@strapi/strapi' {
       'api::cart.cart': ApiCartCart;
       'api::category.category': ApiCategoryCategory;
       'api::flash-sale.flash-sale': ApiFlashSaleFlashSale;
+      'api::order.order': ApiOrderOrder;
       'api::product.product': ApiProductProduct;
       'api::voucher.voucher': ApiVoucherVoucher;
       'plugin::content-releases.release': PluginContentReleasesRelease;
