@@ -53,6 +53,9 @@
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "orders"
+    },
+    "note": {
+      "type": "text"
     }
   }
 }

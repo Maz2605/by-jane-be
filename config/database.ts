@@ -1,39 +1,39 @@
-const path = require('path');
+// path: config/database.ts
 
-module.exports = ({ env }) => {
-  // Kiểm tra xem có biến DATABASE_URL không (Trên Render sẽ có)
-  const client = env('DATABASE_URL') ? 'postgres' : 'sqlite';
+import path from 'path';
 
-  // Cấu hình cho PostgreSQL (Trên Render)
-  if (client === 'postgres') {
-    const parse = require('pg-connection-string').parse;
-    const config = parse(env('DATABASE_URL'));
-    return {
+export default ({ env }) => {
+  // Lấy client (postgres)
+  const client = env('DATABASE_CLIENT', 'postgres');
+
+  // Cấu hình kết nối
+  const connections = {
+    postgres: {
       connection: {
-        client: 'postgres',
-        connection: {
-          host: config.host,
-          port: config.port,
-          database: config.database,
-          user: config.user,
-          password: config.password,
-          ssl: {
-            rejectUnauthorized: false, // Bắt buộc cho Render
-          },
+        connectionString: env('DATABASE_URL'), // Nếu bạn dùng full URL
+        // Hoặc dùng từng biến lẻ:
+        host: env('DATABASE_HOST', '127.0.0.1'),
+        port: env.int('DATABASE_PORT', 5432),
+        database: env('DATABASE_NAME', 'strapi'),
+        user: env('DATABASE_USERNAME', 'strapi'),
+        password: env('DATABASE_PASSWORD', 'strapi'),
+        ssl: env.bool('DATABASE_SSL', false) && {
+          rejectUnauthorized: false, // Bắt buộc dòng này để connect Render từ Local
         },
-        debug: false,
       },
-    };
-  }
+      pool: {
+        min: env.int('DATABASE_POOL_MIN', 2),
+        max: env.int('DATABASE_POOL_MAX', 10),
+      },
+    },
+    // ... các config khác ...
+  };
 
-  // Cấu hình cho SQLite (Ở máy local của bạn)
   return {
     connection: {
-      client: 'sqlite',
-      connection: {
-        filename: path.join(__dirname, '..', env('DATABASE_FILENAME', '.tmp/data.db')),
-      },
-      useNullAsDefault: true,
+      client,
+      ...connections[client],
+      acquireConnectionTimeout: env.int('DATABASE_CONNECTION_TIMEOUT', 60000),
     },
   };
 };
