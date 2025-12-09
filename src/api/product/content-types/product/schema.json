@@ -49,6 +49,10 @@
       "relation": "manyToOne",
       "target": "api::flash-sale.flash-sale",
       "inversedBy": "products"
+    },
+    "favorite": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
