@@ -50,9 +50,11 @@
       "target": "api::flash-sale.flash-sale",
       "inversedBy": "products"
     },
-    "favorite": {
-      "type": "boolean",
-      "default": false
+    "favorites": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::favorite.favorite",
+      "mappedBy": "product"
     }
   }
 }
