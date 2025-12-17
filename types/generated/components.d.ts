@@ -1,5 +1,15 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface ArticleCategory extends Struct.ComponentSchema {
+  collectionName: 'components_article_categories';
+  info: {
+    displayName: 'Category';
+  };
+  attributes: {
+    name: Schema.Attribute.String;
+  };
+}
+
 export interface ElementsHeroSlide extends Struct.ComponentSchema {
   collectionName: 'components_elements_hero_slides';
   info: {
@@ -56,6 +66,7 @@ export interface ShopOrderItem extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'article.category': ArticleCategory;
       'elements.hero-slide': ElementsHeroSlide;
       'inventory.variant': InventoryVariant;
       'shop.cart-item': ShopCartItem;
