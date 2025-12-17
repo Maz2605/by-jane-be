@@ -1,5 +1,19 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface ElementsHeroSlide extends Struct.ComponentSchema {
+  collectionName: 'components_elements_hero_slides';
+  info: {
+    displayName: 'HeroSlide';
+  };
+  attributes: {
+    alt_text: Schema.Attribute.String;
+    media: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    poster: Schema.Attribute.Media<'images'>;
+    type: Schema.Attribute.Enumeration<['image', 'video']> &
+      Schema.Attribute.DefaultTo<'image'>;
+  };
+}
+
 export interface InventoryVariant extends Struct.ComponentSchema {
   collectionName: 'components_inventory_variants';
   info: {
@@ -42,6 +56,7 @@ export interface ShopOrderItem extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'elements.hero-slide': ElementsHeroSlide;
       'inventory.variant': InventoryVariant;
       'shop.cart-item': ShopCartItem;
       'shop.order-item': ShopOrderItem;

@@ -1,0 +1,38 @@
+{
+  "collectionName": "components_elements_hero_slides",
+  "info": {
+    "displayName": "HeroSlide"
+  },
+  "options": {},
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "default": "image",
+      "enum": [
+        "image",
+        "video"
+      ]
+    },
+    "media": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "poster": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "alt_text": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}
