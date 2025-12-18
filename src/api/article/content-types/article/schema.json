@@ -59,6 +59,19 @@
     "isFeatured": {
       "type": "boolean",
       "default": false
+    },
+    "gallery": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "excerpt": {
+      "type": "text"
     }
   }
 }
