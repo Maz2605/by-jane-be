@@ -35,6 +35,7 @@
     },
     "orderStatus": {
       "type": "enumeration",
+      "default": "pending",
       "enum": [
         "pending",
         "confirmed",
@@ -48,7 +49,7 @@
       "component": "shop.order-item",
       "repeatable": true
     },
-    "users_permissions_user": {
+    "user": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",

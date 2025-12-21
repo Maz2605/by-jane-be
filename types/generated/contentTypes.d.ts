@@ -650,7 +650,8 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
     note: Schema.Attribute.Text;
     orderStatus: Schema.Attribute.Enumeration<
       ['pending', 'confirmed', 'shipping', 'done', 'cancelled']
-    >;
+    > &
+      Schema.Attribute.DefaultTo<'pending'>;
     paymentMethod: Schema.Attribute.Enumeration<['cod', 'banking']>;
     publishedAt: Schema.Attribute.DateTime;
     shippingAddress: Schema.Attribute.Text;
@@ -658,7 +659,7 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    users_permissions_user: Schema.Attribute.Relation<
+    user: Schema.Attribute.Relation<
       'manyToOne',
       'plugin::users-permissions.user'
     >;
