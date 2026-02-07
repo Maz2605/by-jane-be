@@ -1,3 +1,5 @@
+import path from 'path';
+
 export default [
   'strapi::logger',
   'strapi::errors',
@@ -20,7 +22,17 @@ export default [
   'strapi::cors',
   'strapi::poweredBy',
   'strapi::query',
-  'strapi::body',
+  {
+    name: 'strapi::body',
+    config: {
+      formidable: {
+        uploadDir: path.join(process.cwd(), 'tmp'),
+        keepExtensions: true,
+      },
+      multipart: true,
+      includeUnparsed: true,
+    },
+  },
   'strapi::session',
   'strapi::favicon',
   'strapi::public',
